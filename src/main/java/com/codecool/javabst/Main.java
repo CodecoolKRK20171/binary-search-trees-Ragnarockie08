@@ -1,5 +1,7 @@
 package com.codecool.javabst;
 
+import com.codecool.javabst.hashTable.HashNode;
+import com.codecool.javabst.hashTable.HashTable;
 import com.codecool.javabst.heap.MinHeap;
 import com.codecool.javabst.tree.BinarySearchTree;
 
@@ -12,13 +14,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        MinHeap heap = new MinHeap();
+        HashTable<String, Integer> map = new HashTable<>();
 
-        int[] array = new int[] {12, 13, 3, 24, 5};
+        map.add("dupa", 5);
+        map.add("pierogi", 10);
+        map.add("salata", 5);
+        map.add("auto", 10);
+        map.add("samochod", 15);
+        map.add("woda", 10);
 
-        heap.build(array);
-        System.out.println(heap.toString());
-        heap.remove();
-        System.out.println(heap.toString());
+
     }
 }
