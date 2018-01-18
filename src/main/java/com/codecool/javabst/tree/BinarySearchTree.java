@@ -1,4 +1,4 @@
-package com.codecool.javabst;
+package com.codecool.javabst.tree;
 
 import java.util.List;
 
