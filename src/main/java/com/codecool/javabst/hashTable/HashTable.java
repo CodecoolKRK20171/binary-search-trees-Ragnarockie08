@@ -1,16 +1,18 @@
 package com.codecool.javabst.hashTable;
 
+import java.util.LinkedList;
+
 import static java.lang.Math.abs;
 
 public class HashTable<K, V> {
 
     private static final int INITIAL_SIZE = 16;
-    private HashNode<K, V>[] array;
+    private LinkedList<HashNode<K, V>>[] array;
     private int size;
 
     public HashTable() {
-        this.array = new HashNode[INITIAL_SIZE];
-        this.size = size;
+        this.array = new LinkedList[INITIAL_SIZE];
+        this.size = 0;
     }
 
     private int hashFunction(K key){
@@ -25,13 +27,15 @@ public class HashTable<K, V> {
         HashNode<K, V> hashNode = new HashNode<>(key, value);
 
         if (array[hashCode] == null){
-            array[hashCode] = hashNode;
+            array[hashCode] = new LinkedList<>();
+            array[hashCode].add(hashNode);
         } else {
-            HashNode<K, V> temp = array[hashCode];
-            while (temp.getNextNode() != null){
-                temp = temp.getNextNode();
+            for (HashNode node : array[hashCode]){
+                if (node.getKey().equals(key)) {
+                    throw new IllegalArgumentException();
+                }
             }
-            temp.setNextNode(hashNode);
+            array[hashCode].add(hashNode);
         }
         size++;
     }
@@ -41,12 +45,12 @@ public class HashTable<K, V> {
         int hashCode = hashFunction(key);
 
         if (array[hashCode] != null){
-            HashNode<K, V> temp = array[hashCode];
-
-            while (!temp.getKey().equals(key) && temp.getNextNode() != null){
-                temp = temp.getNextNode();
+            LinkedList<HashNode<K, V>> list = array[hashCode];
+            for (HashNode node : list){
+                if (node.getKey().equals(key)){
+                    return (V) node.getValue();
+                }
             }
-            return temp.getValue();
         }
         return null;
     }
@@ -56,17 +60,11 @@ public class HashTable<K, V> {
         int index = hashFunction(key);
 
         if (array[index] != null) {
-            HashNode<K, V> root = array[index];
-            HashNode<K, V> prev = null;
-
-            while (!root.getKey().equals(key)) {
-                    prev = root;
-                    root = root.getNextNode();
-            }
-            if (prev != null){
-                prev.setNextNode(root.getNextNode());
-            } else {
-                array[index] = root.getNextNode();
+            LinkedList<HashNode<K, V>> list = array[index];
+            for (HashNode node : list){
+                if (node.getKey().equals(key)){
+                    list.remove(node);
+                }
             }
             size--;
         }
@@ -74,7 +72,7 @@ public class HashTable<K, V> {
 
     public void clearAll(){
 
-        array = new HashNode[INITIAL_SIZE];
+        array = new LinkedList[INITIAL_SIZE];
     }
 
     @Override
@@ -83,18 +81,15 @@ public class HashTable<K, V> {
         String output = "{";
         int index = 0;
 
-        for (HashNode node : array){
-            if (node == null){
+        for (LinkedList<HashNode<K, V>> list : array){
+            if (list == null){
                 continue;
             }
-            if (index > 0){
-                output += ", ";
-            }
-            output += node.toString();
-            HashNode temp = node.getNextNode();
-            while (temp != null){
-                output += " => " + temp.toString();
-                temp = temp.getNextNode();
+            for (HashNode node : list ){
+                if (index > 0){
+                    output += ", ";
+                }
+                output += node.toString();
             }
             index++;
         }

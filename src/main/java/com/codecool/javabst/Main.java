@@ -23,6 +23,19 @@ public class Main {
         map.add("samochod", 15);
         map.add("woda", 10);
 
+        System.out.println(map);
+        System.out.println(map.getValue("auto"));
+//
+//        MinHeap heap = new MinHeap();
+//
+//        for (int i = 10; i > 0; i--){
+//            heap.add(i);
+//        }
+//
+//        System.out.println(heap);
+
+
+
 
     }
 }

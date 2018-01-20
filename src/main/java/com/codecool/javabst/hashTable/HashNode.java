@@ -4,7 +4,6 @@ public class HashNode<K, V> {
 
     private K key;
     private V value;
-    private HashNode<K, V> nextNode;
 
     public HashNode(K key, V value) {
         this.key = key;
@@ -25,14 +24,6 @@ public class HashNode<K, V> {
 
     public void setValue(V value) {
         this.value = value;
-    }
-
-    public HashNode<K, V> getNextNode() {
-        return nextNode;
-    }
-
-    public void setNextNode(HashNode<K, V> nextNode) {
-        this.nextNode = nextNode;
     }
 
     public String toString(){

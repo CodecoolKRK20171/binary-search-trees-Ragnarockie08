@@ -7,12 +7,12 @@ import java.util.PriorityQueue;
 
 public class MinHeap {
 
-
+    private static final int INITIAL_SIZE = 10;
     private int[] data;
     private int size;
 
     public MinHeap() {
-        this.data = new int[0];
+        this.data = new int[INITIAL_SIZE];
         size = 0;
     }
 
@@ -25,7 +25,7 @@ public class MinHeap {
 
     public void add(int value){
 
-        data = increaseSize();
+        increaseSize();
 
         data[size++] = value;
         handleSwipUp();
@@ -95,9 +95,11 @@ public class MinHeap {
         data[index2] = temp;
     }
 
-    private int[] increaseSize(){
-        return Arrays.copyOf(data, size+1);
+    private void increaseSize(){
 
+        if (data.length - size < 1){
+            data = Arrays.copyOf(data, data.length*2);
+        }
     }
 
     private int getParent(int i){
