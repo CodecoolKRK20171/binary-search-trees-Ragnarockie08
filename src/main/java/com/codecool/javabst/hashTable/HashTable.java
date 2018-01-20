@@ -77,7 +77,8 @@ public class HashTable<K, V> {
     @Override
     public String toString(){
 
-        String output = "{";
+        StringBuilder output = new StringBuilder();
+        output.append("{");
         int index = 0;
 
         for (LinkedList<HashNode<K, V>> list : array){
@@ -86,15 +87,15 @@ public class HashTable<K, V> {
             }
             for (HashNode node : list ){
                 if (index > 0){
-                    output += ", ";
+                    output.append(", ");
                 }
-                output += node.toString();
+                output.append(node.toString());
                 index++;
             }
         }
-        output += "}";
+        output.append("}");
 
-        return output;
+        return output.toString();
     }
 
     public int size(){
