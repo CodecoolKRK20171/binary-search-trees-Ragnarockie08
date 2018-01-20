@@ -28,15 +28,14 @@ public class HashTable<K, V> {
 
         if (array[hashCode] == null){
             array[hashCode] = new LinkedList<>();
-            array[hashCode].add(hashNode);
         } else {
             for (HashNode node : array[hashCode]){
                 if (node.getKey().equals(key)) {
                     throw new IllegalArgumentException();
                 }
             }
-            array[hashCode].add(hashNode);
         }
+        array[hashCode].add(hashNode);
         size++;
     }
 
