@@ -90,8 +90,8 @@ public class HashTable<K, V> {
                     output += ", ";
                 }
                 output += node.toString();
+                index++;
             }
-            index++;
         }
         output += "}";
 
